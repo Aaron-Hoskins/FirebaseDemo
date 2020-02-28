@@ -1,3 +1,22 @@
 - Oauth
     - Convention used be remote servers to authenticate users via a authentication token
     - Oauth2 is the current version
+
+- Push Notifications
+    - Common Push not. clients
+        - Firebase cloud Messaging (FCM)
+        - Google cloud Messaging (GCM)
+            - Deprecated and generally was replaced by FCM
+        - Urban Airship
+        - Parse
+    - 2 ways to Send push notifications
+        - Online GUI (Web site)
+        - Network request (Build a URL with message in it)
+    - To implement push notifications into your project
+        - Android Service that will receive the notification
+            - Override the onReceive Method
+            - Receive the data for the notif.
+            - Build the notif
+            - if using android version Oreo or above
+                - associate that notif to a notification channel
+            - Notify the Notification Manager and associate the built notification
