@@ -10,17 +10,19 @@ import com.google.firebase.auth.FirebaseUser
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
-    val mAuth = FirebaseAuth.getInstance()
+    var mAuth : FirebaseAuth? = null
     var currentUser : FirebaseUser? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        mAuth = FirebaseAuth.getInstance()
     }
 
     override fun onStart() {
         super.onStart()
-        currentUser = mAuth.currentUser
+        currentUser = mAuth?.currentUser
         updateUI()
     }
 
@@ -34,7 +36,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun updateUI() {
         if(currentUser != null) {
-                tvCurrentUser.text = currentUser?.email?: "NO USER LOGGED IN"
+                tvCurrentUser.text = currentUser!!.email?: "NO USER LOGGED IN"
         }
 
     }
@@ -42,13 +44,13 @@ class MainActivity : AppCompatActivity() {
     private fun logInUser(){
         val email = etUserEmail.text.toString()
         val password = etPassword.text.toString()
-        mAuth.signInWithEmailAndPassword(email, password)
+        mAuth!!.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener(
                 this
             ) { task ->
                 if (task.isSuccessful) { // Sign in success, update UI with the signed-in user's information
                     Log.d("TAG", "signInWithEmail:success")
-                    currentUser = mAuth.currentUser
+                    currentUser = mAuth?.currentUser
                     updateUI()
                 } else { // If sign in fails, display a message to the user.
                     Log.w(
@@ -65,20 +67,20 @@ class MainActivity : AppCompatActivity() {
             }
     }
     private fun logOutUser(){
-        mAuth.signOut()
-        currentUser = mAuth.currentUser
+        mAuth?.signOut()
+        currentUser = mAuth?.currentUser
         updateUI()
     }
     private fun signUpUser(){
         val email = etUserEmail.text.toString()
         val password = etPassword.text.toString()
-        mAuth.createUserWithEmailAndPassword(email, password)
+        mAuth!!.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(
                 this
             ) { task ->
                 if (task.isSuccessful) { // Sign in success, update UI with the signed-in user's information
                     Log.d("TAG", "createUserWithEmail:success")
-                    currentUser = mAuth.currentUser
+                    currentUser = mAuth?.currentUser
                     updateUI()
                 } else { // If sign in fails, display a message to the user.
                     Log.w(
