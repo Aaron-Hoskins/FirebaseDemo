@@ -36,7 +36,9 @@ class MainActivity : AppCompatActivity() {
 
     private fun updateUI() {
         if(currentUser != null) {
-                tvCurrentUser.text = currentUser!!.email?: "NO USER LOGGED IN"
+                tvCurrentUser.text = currentUser!!.email
+        } else {
+            tvCurrentUser.text = "NO USER LOGGED IN"
         }
 
     }
