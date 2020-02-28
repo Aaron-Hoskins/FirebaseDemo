@@ -1,0 +1,3 @@
+- Oauth
+    - Convention used be remote servers to authenticate users via a authentication token
+    - Oauth2 is the current version
